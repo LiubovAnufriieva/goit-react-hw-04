@@ -1,7 +1,7 @@
 import css from "./SearchBar.module.css";
 import toast from "react-hot-toast";
 import { useState } from "react";
-
+import { FiSearch } from 'react-icons/fi';
 const SearchBar = ({ onSubmit }) => {
   const [query, setQuery] = useState("");
 
@@ -32,6 +32,7 @@ const SearchBar = ({ onSubmit }) => {
         />
         <button type="submit" className={css.button}>
           Search
+          <FiSearch size="16px" className={css.icon}/>
         </button>
       </form>
     </header>

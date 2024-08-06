@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// const API_KEY = "Hrkp0tJMC9Vm6X9hVDFX-1iMXAt5mRGXqc3aa53cQik";
 const API_KEY = "y7_Bvyt_TQP1bMgl9HJh_HiI9cbo6aT-p5XyD9_6pcE";
 axios.defaults.baseURL =  "https://api.unsplash.com/search/photos";
 

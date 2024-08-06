@@ -4,7 +4,7 @@
 	flex-direction: column;
 
 	max-width: 1440px;
-	padding: 0 30px;
+	/* padding: 0 30px; */
 	gap: 20px;
 }
 

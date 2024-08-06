@@ -29,7 +29,7 @@ useEffect(() => {
     setLoader(true);
     try {
       setError(false);
-      const data = await fetchImages(query, page);
+      const data = await fetchImages(page, query);
       if (data.results.length === 0) {
         toast.error("Sorry. There are no images ... 😭");
       } else {
