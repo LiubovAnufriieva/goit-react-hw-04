@@ -1,46 +1,91 @@
 import { useState, useEffect } from "react";
-import SearchBox from "./SearchBox/SearchBox";
-import initialContacts from "../data/initialContacts.json";
-import ContactList from "./ContactList/ContactList";
-import ContactForm from "./ContactForm/ContactForm";
+import { toast } from 'react-hot-toast';
+import fetchImages from "./FetchImages/fetchImages"
+
+import ImageGallery from "./ImageGallery/ImageGallery";
+import Loader from "./Loader/Loader";
+import ErrorMassage from "./ErrorMessage/ErrorMessage";
+import SearchBar from "./SearchBar/SearchBar";
+import LoadMoreBtn from "./LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "./ImageModal/ImageModal";
+
 import css from "./App.module.css";
 
 function App() {
-  const [contacts, setContacts] = useState(() => {
-    const saveContacts = localStorage.getItem("contacts");
-    return saveContacts ? JSON.parse(saveContacts) : initialContacts;
-  });
-  const [filter, setFilter] = useState("");
+const [images, setImages] = useState([]);
+const [query, setQuery] = useState("");
+const [loader, setLoader] = useState(false);
+const [error, setError] = useState(false);
+const [page, setPage] = useState(1);
+const [modalIsOpen, setModalIsOpen] = useState(false);
+const [isVisible, setIsVisible] = useState(false);
+const [selectedImage, setSelectedImage] = useState(null);
 
-  const addContact = (newContact) => {
-    console.log(newContact);
-    setContacts((prevContacts) => {
-      return [...prevContacts, newContact];
-    });
+useEffect(() => {
+  if (!query) {
+    return
+  }
+  const getImages = async () => {
+    setLoader(true);
+    try {
+      setError(false);
+      const data = await fetchImages(query, page);
+      if (data.results.length === 0) {
+        toast.error("Sorry. There are no images ... 😭");
+      } else {
+        setImages((prevImages) => [...prevImages, ...data.results]);
+        setIsVisible(data.total_pages && data.total_pages !== page);
+      }
+    } catch (error) {
+      setError(true);
+      toast.error("Oops! Something went wrong. Please try again later...");
+    } finally {
+      setLoader(false);
+    }
   };
+  getImages();
+}, [query, page]);
 
-  const deleteContact = (contactId) => {
-    setContacts((prevContacts) => {
-      return prevContacts.filter((contact) => contact.id !== contactId);
-    });
-  };
+const handleSubmit = (query) => {
+  setQuery(query);
+  setPage(1);
+  setImages([]);
+}
 
-  const visibleContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+const handleLoadMore = () => {
+  setPage(page + 1);
+}
 
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
+const openModal = (image) => {
+  setSelectedImage(image);
+  setModalIsOpen(true);
+}
 
-  console.log(contacts);
-
+const closeModal = () => {
+  setModalIsOpen(false);
+  setSelectedImage(null);
+}
   return (
     <div className={css.container}>
-      <h1 className={css.title}>Phonebook</h1>
-      <ContactForm onAdd={addContact} />
-      <SearchBox value={filter} onFilter={setFilter} />
-      <ContactList contacts={visibleContacts} onDelete={deleteContact} />
+      <SearchBar onSubmit={handleSubmit} />
+      {images.length > 0 && (
+        <ImageGallery images={images} onImageClick={openModal}/>
+      )}
+      {error && <ErrorMassage />}
+      {loader && <Loader/>}
+      {images.length > 0 && !loader && isVisible && (
+        <LoadMoreBtn onClick={handleLoadMore}/>
+      )}
+      {selectedImage && (
+        <ImageModal 
+        isOpen={modalIsOpen}
+        onClose={closeModal}
+        imageUrl={selectedImage.urls.regular}
+        altDescription={selectedImage.description}
+        likes={selectedImage.likes}
+        user={selectedImage.user.name}
+        />
+      )}
     </div>
   );
 }
