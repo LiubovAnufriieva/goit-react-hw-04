@@ -17,35 +17,33 @@
   margin-bottom: 20px;
 }
 
-.header {
-  margin-bottom: 10px;
-  font-size: 1.5em;
-  color: #333;
-}
-
 .description {
   margin-bottom: 10px;
   font-size: 1em;
   color: #666;
 }
 .likes {
-  margin-bottom: 10px;
-  font-size: 1em;
+  font-size: 18px;
   color: #4e75ff;
 }
 
 .icon {
-    margin-top: 20px;
-    margin-right: 10px;
     color: #4e75ff;
 }
 
 .author {
-  font-size: 1.2em;
   color: #4e75ff;
   margin-bottom: 20px;
 }
 
 .description {
   color: #4e75ff;
+}
+
+.divLikes {
+  display: flex;
+  gap: 10px;
+  justify-content: start;
+  align-items: baseline;
+  padding: 10px 0;
 }

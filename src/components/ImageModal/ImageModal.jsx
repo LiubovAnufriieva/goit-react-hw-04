@@ -35,8 +35,8 @@ const ImageModal = ({
         <h3 className={css.author}>Author: {user}</h3>
         <p className={css.description}>{description}</p>
         <div className={css.divLikes}>
+        <AiOutlineLike className={css.icon} size="25px"/>
           <p className={css.likes}>
-            <AiOutlineLike className={css.icon} />
             {likes}
           </p>
         </div>
