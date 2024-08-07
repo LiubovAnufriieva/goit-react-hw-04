@@ -20,6 +20,7 @@ const [page, setPage] = useState(1);
 const [modalIsOpen, setModalIsOpen] = useState(false);
 const [isVisible, setIsVisible] = useState(false);
 const [selectedImage, setSelectedImage] = useState(null);
+const [isEmpty, setIsEmpty] = useState(false);
 
 
 useEffect(() => {
@@ -34,6 +35,7 @@ useEffect(() => {
       console.log(data.results);
       
       if (data.results.length === 0) {
+        setIsEmpty(true);
         setIsVisible(false);
         toast.error("Sorry. There are no images matching your query ... 😭");
       } else {
@@ -56,6 +58,7 @@ const handleSubmit = (query) => {
   setError(null);
   setImages([]);
   setIsVisible(false);
+  setIsEmpty(false);
 }
 
 const handleLoadMore = () => {
