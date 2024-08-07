@@ -32,9 +32,13 @@ const SearchBar = ({ onSubmit }) => {
         />
         <button type="submit" className={css.button}>
           Search
-          <FiSearch size="16px" className={css.icon}/>
+          <FiSearch size="16px" className={css.icon} />
         </button>
-        <Toaster position="top-center" reverseOrder={false} />
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+         
+        />
       </form>
     </header>
   );

@@ -34,7 +34,8 @@ useEffect(() => {
       console.log(data.results);
       
       if (data.results.length === 0) {
-        return toast.error("Sorry. There are no images ... 😭");
+        setIsVisible(false);
+        toast.error("Sorry. There are no images matching your query ... 😭");
       } else {
         setImages((prevImages) => [...prevImages, ...data.results]);
         setIsVisible(data.total_pages && data.total_pages !== page);
