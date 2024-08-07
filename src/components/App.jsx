@@ -21,6 +21,7 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
 const [isVisible, setIsVisible] = useState(false);
 const [selectedImage, setSelectedImage] = useState(null);
 
+
 useEffect(() => {
   if (!query) {
     return
@@ -30,8 +31,10 @@ useEffect(() => {
     try {
       setError(false);
       const data = await fetchImages(page, query);
+      console.log(data.results);
+      
       if (data.results.length === 0) {
-        toast.error("Sorry. There are no images ... 😭");
+        return toast.error("Sorry. There are no images ... 😭");
       } else {
         setImages((prevImages) => [...prevImages, ...data.results]);
         setIsVisible(data.total_pages && data.total_pages !== page);
@@ -49,7 +52,9 @@ useEffect(() => {
 const handleSubmit = (query) => {
   setQuery(query);
   setPage(1);
+  setError(null);
   setImages([]);
+  setIsVisible(false);
 }
 
 const handleLoadMore = () => {
@@ -63,7 +68,7 @@ const openModal = (image) => {
 
 const closeModal = () => {
   setModalIsOpen(false);
-  setSelectedImage(null);
+  
 }
   return (
     <div className={css.container}>
@@ -79,9 +84,10 @@ const closeModal = () => {
       {selectedImage && (
         <ImageModal 
         isOpen={modalIsOpen}
-        onClose={closeModal}
+        onRequestClose={closeModal}
         imageUrl={selectedImage.urls.regular}
         altDescription={selectedImage.description}
+        description={selectedImage.description}
         likes={selectedImage.likes}
         user={selectedImage.user.name}
         />

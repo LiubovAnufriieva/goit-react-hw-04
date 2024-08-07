@@ -34,13 +34,15 @@
     border-radius: 8px;
     border: none;
     padding: 5px 20px;
-    border-color: transparent;
+    background-color: #fff;
     color: #4e75ff;;
     font-weight: 700;
+
 }
+
 .button:hover {
-    box-shadow: #fff;
-  }
+    transform: scale(1.1);
+}
 .icon {
     margin-top: 2px;
 }
