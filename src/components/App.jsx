@@ -41,6 +41,8 @@ useEffect(() => {
       } else {
         setImages((prevImages) => [...prevImages, ...data.results]);
         setIsVisible(data.total_pages && data.total_pages !== page);
+        console.log(data.total_pages);
+        console.log(page);
       }
     } catch (error) {
       setError(true);

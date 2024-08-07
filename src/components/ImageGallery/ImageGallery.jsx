@@ -9,7 +9,7 @@ const ImageGallery = ({ images, onImageClick }) => {
                 <li className={css.galleryItem} key={image.id}>
                     <ImageCard 
                     image={image}
-                    onClick={onImageClick}
+                    onClick={() => onImageClick(image)} 
                     />
                 </li>
                 ))}

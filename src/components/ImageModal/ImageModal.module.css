@@ -1,12 +1,10 @@
 .container {
-  /* position: relative; */
+  width: 80%;
+  max-width: 1000px;
   padding: 20px;
   border-radius: 10px;
-  outline: none;
-  width: 80%;
-  max-width: 900px;
   margin: 0 auto;
-  box-shadow: 0 4px 6px rgba(44, 59, 224, 0.4);
+  box-shadow: 0 4px 6px rgba(14, 31, 227, 0.4);
 }
 
 .image {
