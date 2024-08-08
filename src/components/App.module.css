@@ -1,5 +1,5 @@
 .container {
-	margin: o auto;
+	/* margin: o auto; */
 	display: flex;
 	flex-direction: column;
     justify-content: center;

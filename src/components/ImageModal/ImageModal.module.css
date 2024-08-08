@@ -1,10 +1,11 @@
 .container {
-  width: 80%;
-  max-width: 1000px;
+  width: 90%;
+  max-width: 900px;
   padding: 20px;
   border-radius: 10px;
   margin: 0 auto;
   box-shadow: 0 4px 6px rgba(14, 31, 227, 0.4);
+  background-color: #fff;
 }
 
 .image {
