@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from 'react-hot-toast';
 import fetchImages from "./FetchImages/fetchImages"
 
+import { Text } from "./Text/Text";
 import ImageGallery from "./ImageGallery/ImageGallery";
 import Loader from "./Loader/Loader";
 import ErrorMassage from "./ErrorMessage/ErrorMessage";
@@ -21,7 +22,6 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
 const [isVisible, setIsVisible] = useState(false);
 const [selectedImage, setSelectedImage] = useState(null);
 const [isEmpty, setIsEmpty] = useState(false);
-
 
 useEffect(() => {
   if (!query) {
@@ -79,6 +79,9 @@ const closeModal = () => {
   return (
     <div className={css.container}>
       <SearchBar onSubmit={handleSubmit} />
+      {!images.length && !isEmpty && (
+        <Text textAlign="center">Let`s begin search 🔎</Text>
+      )}
       {images.length > 0 && (
         <ImageGallery images={images} onImageClick={openModal}/>
       )}

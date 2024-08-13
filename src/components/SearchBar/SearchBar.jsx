@@ -37,7 +37,6 @@ const SearchBar = ({ onSubmit }) => {
         <Toaster
           position="top-center"
           reverseOrder={false}
-         
         />
       </form>
     </header>
